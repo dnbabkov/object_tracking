@@ -41,6 +41,7 @@ class SAMSegmentor:
         self.dino_model = AutoModelForZeroShotObjectDetection.from_pretrained("IDEA-Research/grounding-dino-tiny").to("cuda")
 
     def segment(self, image_bgr, prompt, depth_map):
+        print("segmenting...")
         image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
         image_pil = PILImage.fromarray(image_rgb)
         text_labels = [[prompt]]
@@ -61,7 +62,7 @@ class SAMSegmentor:
             target_sizes=[image_pil.size[::-1]]
         )
 
-        print("dino_pricessor finished")
+        print("dino_processor finished")
 
         end_time_DINO = time.time()
 
